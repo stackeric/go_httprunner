@@ -1,4 +1,4 @@
-module github.com/stackeric/box
+module github.com/stackeric/go_httprunner
 
 go 1.14
 
