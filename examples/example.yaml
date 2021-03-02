@@ -1,0 +1,33 @@
+config:
+    name: "request methods testcase: validate with functions"
+    variables:
+        foo1: bar1
+    base_url: "https://postman-echo.com"
+    verify: False
+
+teststeps:
+-
+    name: get with params
+    variables:
+        foo2: session_bar2
+        sum_v: "${sum_two(1, 2)}"
+    request:
+        method: GET
+        url: /get
+        params:
+            foo1: $foo1
+            foo2: $foo2
+            sum_v: $sum_v
+        headers:
+            User-Agent: HttpRunner/${get_httprunner_version()}
+    extract:
+        session_foo2: "args.foo2"
+    validate:
+        - 
+            compare : eq
+            key : status_code
+            expected : 200
+        -  
+            compare : eq
+            key : args.sum_v
+            expected : "3"
